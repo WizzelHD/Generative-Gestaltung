@@ -1,0 +1,41 @@
+Was wurde verwendet?
+	Webgl
+	ml.js (Gesichtserkennung, Mediapipe kann das nicht)
+		MP kann Punkte erkennen aber nicht direkt Emotionen
+	Mediapipe (Handtracking, Segmentierung)
+	Pixi 
+        Rendering
+
+Wie sachen funktionieren?
+    Silutte
+        Mediapipe erkennt Körper
+        Pixi malt diesen
+    Umrandung
+        Wenn mind. ein Nachbar == 0 ist dann malen
+    Schwarzer Hintergrund
+        Pixi.sprite.alpha
+	Handerkennung
+        Mediapipe gibt (x,y,z) Koordinaten zurück. Mit diesen kann man dann selbst gewählte Korrdinaten festlegen für eine Muster
+        Mediapipe gibt Array mit Koordinaten von 21 Stellen zurück
+        zB zeigefinger.x > hand.x == Zeigefinger hoch
+    Musikvisualisierung
+        Durch p5.js(FFT)
+        Gibt Frequenzen#
+    Verpixelung
+        Durch Pixi.filter
+
+    Datarain
+        Video
+        Rendering durch Pixi
+    Spiegelung
+        Verdrehung von Pixeln
+        Jeder einzelne Teil
+    Emotionserkennung
+        durch m5.js
+    
+
+Welche geplant waren
+	Hintergrund (Körper schlecht zu erkennen)
+	Objekte im Hintergrund(Webgtl getrennte Koordinaten als Mediapipe)
+
+	

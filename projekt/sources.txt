@@ -1,0 +1,16 @@
+# Facerecognition
+https://editor.p5js.org/ima_ml/sketches/fCsz7tb6w
+https://www.youtube.com/watch?v=3yqANLRWGLo
+
+# Segmentation
+https://editor.p5js.org/didny/sketches/bIRGOSAnx
+
+# Handtracking
+https://editor.p5js.org/didny/sketches/bIRGOSAnx
+
+# Musik Visualisierung
+https://www.youtube.com/watch?v=uk96O7N1Yo0
+https://nishanc.medium.com/audio-visualization-in-javascript-with-p5-js-cf3bc7f1be07
+
+# Music Circle
+https://www.youtube.com/watch?v=73Bbk-uhOxw
