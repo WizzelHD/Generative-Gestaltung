@@ -1,0 +1,41 @@
+// Font
+@font-face {
+  font-family: 'Inconsolata';
+  src: font-path('Inconsolata/Inconsolata-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: font-path('Inconsolata/Inconsolata-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Variables
+$font-sans: 'Gotham', sans-serif;
+$font-mono: 'Inconsolata', monospace;
+
+$font-book: 325;
+$font-bold: 400;
+
+$color-gray-100: #e6e6e6;
+$color-gray-200: #cccccc;
+$color-gray-500: #808080;
+$color-gray-800: #333333;
+$rounded-radius: 8pt;
+$rounded-radius-sm: 4pt;
+
+// Page styles
+@import 'page';
+
+// Components styles
+@import 'components/typography';
+@import 'components/callout';
+@import 'components/codesplit';
+@import 'components/table';
+@import 'components/chapter-opening';
+@import 'components/screenshot';

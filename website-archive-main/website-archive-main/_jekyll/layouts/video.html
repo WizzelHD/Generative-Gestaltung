@@ -1,0 +1,177 @@
+---
+layout: base
+---
+
+{% comment %} Get all videos in this collection. {% endcomment %}
+{% assign videos = site[page.collection] %}
+
+{% comment %} Find this video's series. {% endcomment %}
+{% include 1-tools/series-for-video.html video=page %}
+{% assign series = out_series %}
+
+{% comment %} Sort videos and get previous/next videos. {% endcomment %}
+{% include 1-tools/sort-videos.html videos=videos seriesPage=series %}
+{% include 1-tools/previous-next.html videos=out_sortedVideos currentVideo=page %}
+
+{% comment %} Find this video's course (may be null). {% endcomment %}
+{% include 1-tools/series-for-video.html video=series %}
+{% assign course = out_series %}
+
+
+<div class="video">
+
+  {% comment %} Video subtitle. {% endcomment %}
+  <div class="subtitle">
+    {{ course.title | default: series.title }} {{ page.video_type }}
+    #{% if series.series_number %}{{ series.series_number }}.{% endif %}{{ page.video_number }}
+  </div>
+
+  {% if page.remake %}
+  <div class="remake">
+    This video has been remade or updated. You can find the new version on <a href="{{ page.remake | relative_url }}">this webpage</a>.
+  </div>
+  {% endif %}
+
+  <div class="player-and-topics">
+    <div class="player">
+
+      {% comment %} Include YouTube video player. {% endcomment %}
+      {% include 3-modules/video-player.html video_id=page.video_id %}
+
+      {% comment %} Previous/Next buttons and 'Watch all' button. {% endcomment %}
+      <div class="player-controls">
+        <a href="{{ out_previousVideo.url | relative_url | default: '#' }}" class="jump-control {% if out_previousVideo == null %}disabled{% endif %}" aria-label="Previous video">❰</a>
+        <a href="{{ series.url | default: page.collection | relative_url }}" class="watch-all-videos">Watch all videos</a>
+        <a href="{{ out_nextVideo.url | relative_url | default: '#' }}" class="jump-control {% if out_nextVideo == null %}disabled{% endif %}" aria-label="Next video">❱</a>
+      </div>
+    </div>
+
+    <div class="topics">
+      {{ content }}
+
+      {% comment %} Show video topics (used for streams). {% endcomment %}
+      {% if page.topics %}
+        {% include 3-modules/link-list.html links=page.topics title='Topics' class='topics' %}
+      {% endif %}
+      
+    </div>
+  </div>
+
+  {% comment %} Show links for live example and code download. {% endcomment %}
+  {% if page.repository != null or page.web_editor != null %}
+    <div class="code-actions">
+
+      {% comment %} Detect code variations. {% endcomment %}
+      {% comment %} If repository is (probably) an external link. {% endcomment %}
+      {% if page.repository contains '://' %}
+        {% assign repositoryURL = page.repository %}
+
+      {% comment %} If repository is a path to a folder in the repository. {% endcomment %}
+      {% elsif page.repository != null %}
+        {% comment %} Ask for code variations {% endcomment %}
+        {% assign repositoryBasePath = '/' | append: page.collection | append: '/' | append: page.repository %}
+        {% assign repositoryBaseURL = site.github.repository_url | append: '/tree/' | append: site.github.source.branch | append: repositoryBasePath %}
+
+        {% comment %} If page has defined it's own variations create pageVariations for code variation tool. {% endcomment %}
+        {% if page.variations != null %}
+          {% assign pageVariations = page.variations %}
+        {% else %}
+          {% assign pageVariations = null %}
+        {% endif %}
+
+        {% include 1-tools/code-variations.html repositoryBasePath=repositoryBasePath pageVariations=pageVariations %}
+        {% assign codeVariations = out_codeVariations %}
+        {% assign numberOfVariations = codeVariations | size %}
+
+        {% assign downloadBaseURL = site.github_download_prefix | append: repositoryBaseURL %}
+
+        {% for variation in codeVariations %}
+          {% include 3-modules/code-variation.html baseURL=repositoryBaseURL downloadURL=downloadBaseURL variation=variation %}
+        {% endfor %}
+
+      {% endif %}
+
+    </div>
+  {% endif %}
+
+  <div class="links-and-books">
+    {% comment %} List of community contributions (only visible if can_contribute is true). {% endcomment %}
+    {% if page.can_contribute %}
+      <div class="contributions">
+        {% comment %} Converts page.video_number to a string. {% endcomment %}
+        {% capture video_number %}{{ page.video_number }}{% endcapture %}
+
+        {% comment %} Set video which contains the contributions. {% endcomment %}
+        {% comment %} Multi-part videos allow contributions only on the first part. {% endcomment %}
+        {% if video_number contains '.' and page.contributions == null %}
+          {% assign video_number_base = video_number | split: '.' | first %}
+          {% assign firstPartVideoNumber = video_number_base | append: '.1' %}
+          {% assign contributionsVideo = site[page.collection] | where: 'video_number', firstPartVideoNumber | first %}
+        {% else %}
+          {% assign contributionsVideo = page %}
+        {% endif %}
+
+        {% comment %} Include the list of community contributions. {% endcomment %}
+        {% include 3-modules/link-list.html links=contributionsVideo.contributions title='Community Contributions' %}
+
+        {% comment %} Generate a URL to edit this video's file directly on GitHub. {% endcomment %}
+        {% assign addContributionURL = site.github.repository_url | append: '/edit/' | append: site.github.source.branch | append: '/' | append: contributionsVideo.path %}
+
+        {% comment %} Display a message depending on wether there have been made community contributions already. {% endcomment %}
+        {% if contributionsVideo.contributions %}
+          <p>
+            You can also <a href="{{ addContributionURL }}" target="_blank">add your own version!</a>
+            (<a href="{% link _Guides/community-contribution-guide.md %}">See how</a>)
+          </p>
+        {% else %}
+          <p>
+            It seems like there haven't been made any variations based on this {{ page.video_type | downcase }} by the community yet.
+            Be the first and <a href="{{ addContributionURL }}" target="_blank">add your own</a>!
+            If you don't know how, take a look at <a href="{% link _Guides/community-contribution-guide.md %}">this guide</a>.
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% comment %} Community suggested references. {% endcomment %}
+    {% if page.community_references %}
+      {% capture referenceTitle %}Community suggested references{% endcapture %}
+      {% include 3-modules/link-list.html links=page.community_references title=referenceTitle suggestion=true%}
+    {% endif %}
+
+    {% comment %} List of related parts. {% endcomment %}
+    {% if page.parts %}
+      {% capture partsTitle %}Other parts of this {{ page.video_type | downcase }}{% endcapture %}
+      {% include 3-modules/link-list.html links=page.parts title=partsTitle %}
+    {% endif %}
+
+    {% comment %} List of discussed links. {% endcomment %}
+    {% if page.links %}
+      {% capture linksTitle %}Links discussed in this {{ page.video_type | downcase }}{% endcapture %}
+      {% include 3-modules/link-list.html links=page.links title=linksTitle %}
+    {% endif %}
+
+    {% comment %} Links of discussed books/articles/papers. {% endcomment %}
+    {% if page.books %}
+      {% include 3-modules/link-list.html links=page.books title='Books and Papers' %}
+    {% endif %}
+
+    {% comment %} Links of discussed videos. {% endcomment %}
+    {% if page.videos %}
+      {% capture videosTitle %}Videos discussed in this {{ page.video_type | downcase }}{% endcapture %}
+      {% include 3-modules/link-list.html links=page.videos title=videosTitle %}
+    {% endif %}
+
+    {% comment %} Links of discussed tools. {% endcomment %}
+    {% if page.tools %}
+      {% capture toolsTitle %}Tools discussed in this {{ page.video_type | downcase }}{% endcapture %}
+      {% include 3-modules/link-list.html links=page.tools title=toolsTitle %}
+    {% endif %}
+
+    {% comment %} Custom link lists. {% endcomment %}
+    {% for section in page.custom_sections %}
+      {% include 3-modules/link-list.html links=section.items title=section.title class=section.class %}
+    {% endfor %}
+  </div>
+
+</div>

@@ -1,0 +1,78 @@
+<button id="menu-button" class="mobilenav-toggle" tabindex="0" aria-haspopup="true" aria-controls="global-nav">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+<nav class="navigation" id="global-nav" aria-label="Main navigation">
+  <ul class="links">
+
+    <li><a class="top-link" href="{{ '/' | relative_url }}" id="home">Home</a></li>
+
+    <li>
+      <button class="submenu-button top-link" aria-haspopup="true"
+        for="challenges-submenu"><span>Challenges</span></button>
+      <div class="submenu" id="challenges-submenu">
+        <ul class="links">
+          <li><a href="{{ '/CodingChallenges' | relative_url }}">Coding Challenges</a></li>
+          <li><a href="{{ '/challenges/coding-in-the-cabana' | relative_url }}">Coding In The Cabana</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <button class="submenu-button top-link" aria-haspopup="true"
+        for="beginners-submenu"><span>Beginners</span></button>
+      <div class="submenu" id="beginners-submenu">
+        <ul class="links">
+          <li><a href="{{ '/beginners/p5js' | relative_url }}">p5.js</a></li>
+          <li><a href="{{ '/Courses/learning-processing' | relative_url }}">Processing</a></li>
+          <li><a href="{{ '/beginners/git-and-github' | relative_url }}">Git and GitHub</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <button class="submenu-button top-link" aria-haspopup="true" for="courses-submenu"><span>Learning</span></button>
+      <div class="submenu" id="courses-submenu">
+        <ul class="links">
+          <li><a href="{{ '/learning/nature-of-code' | relative_url }}">Nature of Code</a></li>
+          <li><a href="{{ '/learning/ml5' | relative_url }}">ml5.js Beginners Guide</a></li>
+          <li><a href="{{ '/learning/bots/discord' | relative_url }}">Discord Bot</a></li>
+          <li><a href="{{ '/Tutorials' | relative_url }}">Advanced p5.js</a></li>
+          <li><a href="{{ '/GuestTutorials' | relative_url }}">Guest Tutorials</a></li>
+          <li><a href="{{ '/Courses/data-and-apis' | relative_url }}">Data and APIs</a></li>
+          <li><a href="{{ '/learning/programming-with-text' | relative_url }}">Programming with Text</a></li>
+          <li><a href="{{ '/learning/noise' | relative_url }}">Noise</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <button class="submenu-button top-link" aria-haspopup="true" for="more-submenu"><span>More</span></button>
+      <div class="submenu" id="more-submenu">
+        <ul class="links">
+          <!-- <li><a href="{{ '/Streams' | relative_url }}">Streams</a></li> -->
+          <li><a href="{{ '/more/talks/mouse-learning' | relative_url }}">Mouse Learning Talk</a></li>
+          <li><a href="{{ '/more/faq/' | relative_url }}">Frequently Asked Questions</a></li>
+          <li><a href="{{ '/TeachableMachine' | relative_url }}">Teachable Machine</a></li>
+          <li><a href="{{ '/more/workflow' | relative_url }}">Workflow</a></li>
+          <li><a href="{{ '/more/archive' | relative_url }}">Archive</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <button class="submenu-button top-link" aria-haspopup="true"
+        for="contribute-submenu"><span>Contribute</span></button>
+      <div class="submenu" id="contribute-submenu">
+        <ul class="links">
+          <li><a href="{{ '/Guides/community-contribution-guide' | relative_url }}">Community Contribution Guide</a>
+          </li>
+          <li><a href="{{ site.github.repository_url }}" target="_blank" rel="noopener noreferrer">Github</a></li>
+          <li><a href="{{ '/Guides' | relative_url }}">All Guides</a></li>
+        </ul>
+      </div>
+    </li>
+
+  </ul>
+</nav>

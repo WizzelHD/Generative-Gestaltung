@@ -1,0 +1,220 @@
+// Page-scope style
+@page {
+  size: 7in 9.25in;
+  margin-top: 15.875mm;
+  margin-bottom: 15.875mm;
+  -prince-margin-inside: 18mm;
+  -prince-margin-outside: 17mm;
+
+  bleed: 0.125in;
+  -prince-trim: 0.125in;
+  marks: crop cross;
+}
+
+@mixin footer {
+  font-family: $font-sans;
+  font-weight: $font-book;
+  font-size: 6pt;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.25in;
+}
+
+@mixin section-footer($content: counter(page)) {
+  div.running-footer-left {
+    position: running(footer-left);
+    @include footer;
+
+    &::before {
+      margin-right: 12pt;
+      font-size: 7pt;
+      font-weight: $font-bold;
+      content: $content;
+    }
+  }
+
+  div.running-footer-right {
+    position: running(footer-right);
+    @include footer;
+    justify-content: flex-end;
+
+    &::after {
+      margin-left: 12pt;
+      font-size: 7pt;
+      font-weight: $font-bold;
+      content: $content;
+    }
+  }
+
+  div.running-footer-first {
+    position: running(footer-first);
+    @include footer;
+    justify-content: flex-end;
+
+    &::after {
+      font-size: 7pt;
+      font-weight: $font-bold;
+      content: $content;
+    }
+  }
+}
+
+@page chapter:blank {
+  @bottom-left {
+    content: normal;
+  }
+  @bottom-right {
+    content: normal;
+  }
+}
+
+@page chapter:first {
+  @bottom-right {
+    vertical-align: bottom;
+    content: element(footer-first);
+  }
+}
+
+@page chapter:left {
+  // Left Footers
+  @bottom-left {
+    vertical-align: bottom;
+    content: element(footer-left);
+  }
+}
+
+@page chapter:right {
+  // Right Footers
+  @bottom-right {
+    vertical-align: bottom;
+    content: element(footer-right);
+  }
+}
+
+section[data-type='chapter'] {
+  page-break-before: right;
+  page: chapter;
+  prince-page-group: start;
+
+  &[data-chapter-number='0'] {
+    counter-reset: page 1 is-decimal 1;
+  }
+
+  @include section-footer(counter(page));
+}
+
+section[data-type='page'] {
+  page-break-before: right;
+}
+
+@page intro:blank {
+  @bottom-left {
+    content: normal;
+  }
+  @bottom-right {
+    content: normal;
+  }
+}
+
+@page intro:first {
+  @bottom-right {
+    vertical-align: bottom;
+    content: element(footer-first);
+  }
+}
+
+@page intro:left {
+  @bottom-left {
+    vertical-align: bottom;
+    content: element(footer-left);
+  }
+}
+
+@page intro:right {
+  @bottom-right {
+    vertical-align: bottom;
+    content: element(footer-right);
+  }
+}
+
+section[data-type='page']:has(#introduction) {
+  page: intro;
+  prince-page-group: start;
+
+  @include section-footer(counter(page, lower-roman));
+}
+
+@page frontmatter:blank {
+  @bottom-left {
+    content: normal;
+  }
+  @bottom-right {
+    content: normal;
+  }
+}
+
+@page frontmatter:first {
+  @bottom-right {
+    vertical-align: bottom;
+    content: element(footer-first);
+  }
+}
+
+@page frontmatter:left {
+  @bottom-left {
+    vertical-align: bottom;
+    content: element(footer-left);
+  }
+}
+
+@page frontmatter:right {
+  @bottom-right {
+    vertical-align: bottom;
+    content: element(footer-right);
+  }
+}
+
+section[data-type='page']:has(#acknowledgments) {
+  page: frontmatter;
+  prince-page-group: start;
+  counter-reset: page 21 is-decimal 0;
+
+  @include section-footer(counter(page, lower-roman));
+}
+
+@page appendix:blank {
+  @bottom-left {
+    content: normal;
+  }
+  @bottom-right {
+    content: normal;
+  }
+}
+
+@page appendix:first {
+  @bottom-right {
+    vertical-align: bottom;
+    content: element(footer-first);
+  }
+}
+
+@page appendix:left {
+  @bottom-left {
+    vertical-align: bottom;
+    content: element(footer-left);
+  }
+}
+
+@page appendix:right {
+  @bottom-right {
+    vertical-align: bottom;
+    content: element(footer-right);
+  }
+}
+
+section[data-type='page']:has(#appendix-creature-design) {
+  page: appendix;
+  prince-page-group: start;
+
+  @include section-footer(counter(page));
+}

@@ -1,0 +1,124 @@
+.snip-above > .codesplit {
+  position: relative;
+
+  .pairs {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top: 1px dashed $color-gray-200;
+
+    .pair:first-child::before {
+      position: absolute;
+      top: -5.75pt;
+      left: -6pt;
+      content: url('icons/scissors.png');
+      width: 10pt;
+      height: 10pt;
+    }
+  }
+}
+
+.snip-below > .codesplit {
+  position: relative;
+
+  .pairs {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom: 1px dashed $color-gray-200 !important;
+
+    .pair:last-child::after {
+      position: absolute;
+      bottom: -5pt;
+      left: -6pt;
+      content: url('icons/scissors.png');
+      width: 10pt;
+      height: 10pt;
+    }
+  }
+}
+
+.codesplit {
+  margin-top: 12pt;
+  margin-bottom: 12pt;
+  clear: both;
+
+  .pairs {
+    background: $color-gray-100;
+    border-radius: $rounded-radius;
+    overflow: hidden;
+    box-decoration-break: slice;
+  }
+
+  .pair {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+    padding: 0 5mm;
+
+    &:first-child {
+      padding-top: 4pt;
+    }
+
+    &:last-child {
+      padding-bottom: 4pt;
+    }
+
+    code {
+      font-size: 8.5pt;
+      line-height: 13pt;
+    }
+
+    // fill-in-blank
+    span.blank {
+      background: white;
+      color: transparent;
+      font-size: 13pt;
+      line-height: 18pt;
+    }
+
+    &.highlight {
+      background: $color-gray-200;
+      break-inside: avoid;
+
+      // add a margin between adjacent highlight pairs
+      + .pair.highlight {
+        border-top: 1pt solid $color-gray-100;
+      }
+
+      + .pair.continue {
+        border-top: initial;
+      }
+
+      &.bottom-align {
+        align-items: flex-start;
+      }
+
+      &.allow-break {
+        break-inside: auto;
+      }
+    }
+
+    .comment {
+      page-break-inside: avoid;
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+      margin-left: 8pt;
+
+      p {
+        margin: 2pt 0;
+        width: 96pt;
+        font-size: 6.5pt;
+        line-height: 9pt;
+      }
+
+      code {
+        font-size: 7pt;
+        font-weight: 700;
+        line-height: initial;
+        display: initial;
+        background-color: initial;
+        padding: initial;
+      }
+    }
+  }
+}

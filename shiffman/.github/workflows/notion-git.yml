@@ -1,0 +1,25 @@
+name: Import Notion Docs and create PR
+on:
+  workflow_dispatch:
+
+jobs:
+  auto-sync-from-notion-to-github:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Fetch Notion content
+        uses: nature-of-code/fetch-notion@main
+        with:
+          notion-secret: ${{ secrets.NOTION_SECRET }}
+          notion-database-id: ${{ secrets.NOTION_DATABASE_ID }}
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: Notion - Update docs
+          signoff: false
+          branch: notion-update-docs
+          delete-branch: false
+          title: '[Notion] Update docs'

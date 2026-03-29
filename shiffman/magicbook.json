@@ -1,0 +1,41 @@
+{
+  "title": "Nature of Code",
+  "prince": {
+    "license": "license.dat",
+    "javascript": true,
+    "timeout": 60000
+  },
+  "addPlugins": [
+    "magicbook/plugins/katex.js",
+    "magicbook/plugins/codesplit.js",
+    "magicbook/plugins/relative-link.js",
+    "magicbook/plugins/screenshot.js",
+    "magicbook/plugins/chapter-opening.js",
+    "magicbook/plugins/anchor.js",
+    "magicbook/plugins/paragraph.js",
+    "magicbook/plugins/footer.js",
+    "magicbook/plugins/callout.js"
+  ],
+  "files": ["content/*.html"],
+  "layout": "magicbook/layouts/pdf.html",
+  "images": {
+    "colorspace": "grey16",
+    "files": ["content/**/*.jpg", "content/**/*.png", "magicbook/images/**/*.*"]
+  },
+  "stylesheets": {
+    "files": ["magicbook/stylesheets/index.scss"]
+  },
+  "javascripts": {
+    "files": ["magicbook/scripts/*.js"]
+  },
+  "fonts": {
+    "files": "magicbook/fonts/**/*.*",
+    "destination": "assets/fonts/"
+  },
+  "builds": [
+    {
+      "format": "pdf",
+      "destination": "build/full"
+    }
+  ]
+}

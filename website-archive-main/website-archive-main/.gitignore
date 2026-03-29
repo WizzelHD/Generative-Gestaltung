@@ -1,0 +1,13 @@
+### Node.JS ###
+.DS_Store
+/config.js
+node_modules
+.env
+
+### Jekyll ###
+_site/
+.sass-cache/
+.jekyll-metadata
+
+### YouTube Descriptions ###
+_descriptions/

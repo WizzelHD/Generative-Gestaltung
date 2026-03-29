@@ -1,0 +1,200 @@
+#
+# Jekyll Configuraton for https://thecodingtrain.com
+#
+#  ToDo for Jekyll v3.7:
+#    - move collections into a subfolder using collections_dir: <path>
+#    - set layout series-index for relevant files automatically (using a glob pattern).
+#
+
+# --- Site Settings ---
+
+# The site's title.
+title: The Coding Train
+
+# Location from where the site will be served (repository name for GitHub Pages).
+baseurl: /
+
+# Name of the GitHub repository (used for generating links to GitHub).
+repository: CodingTrain/website
+
+# Prefix for download links (downloads only the relevant code from GitHub).
+github_download_prefix: https://codingtrain.github.io/DownGit/#/home?url=
+
+# Prefixes for editor.p5js.org
+web_editor_sketch_prefix: https://editor.p5js.org/codingtrain/sketches/
+web_editor_fullscreen_prefix: https://editor.p5js.org/codingtrain/full/
+
+# Suffixes for auto-detecting the video's code that's available for download/preview.
+#
+# name          string  Name of the code variation.
+# folder        string  Name of the folder relative to the video's repository.
+# live_example  boolean Wether this variation should be used as the live example.
+#                       The first match is used. If the video has the `web_editor`
+#                       property, a link to the P5 Web Editor will be used instead.
+code_variations:
+  - lang: "p5js"
+    folder: "P5"
+  - lang: "Processing"
+    folder: "Processing"
+  - lang: "Javascript"
+    folder: "JavaScript"
+  - lang: "Nodejs"
+    folder: "Node"
+
+# Links to other platforms.
+links:
+  # Link to YouTube.
+  youtube: https://youtube.com/thecodingtrain/
+
+  # Link to Patreon.
+  patreon: https://patreon.com/codingtrain
+
+  # Link to Discord
+  discord: https://discord.gg/hPuGy2g
+
+  # Link to the merch store.
+  merch: https://standard.tv/thecodingtrain
+
+  # Link to the Amazon store.
+  amazon: https://www.amazon.com/shop/thecodingtrain
+
+# SEO data for twitter
+twitter:
+  username: thecodingtrain
+
+# --- Build Settings ---
+
+# Use Kramdown as the preferred Markdown parser.
+markdown: kramdown
+
+# Exclude code for Node.js and Q_and_A
+exclude:
+  [
+    "Node",
+    "Q_and_A",
+    "unit_testing",
+    "node_modules",
+    "vendor/bundle/",
+    "vendor/cache/",
+    "vendor/gems/",
+    "vendor/ruby/",
+  ]
+
+# Include future videos (used for 'Upcoming Streams' section).
+future: true
+
+# Use EDT as the site's timezone.
+timezone: America/New_York
+
+# Compress HTML for production builds.
+compress_html: { ignore: { envs: ["development"] } }
+
+# Search for SASS files inside assets/css.
+sass: { sass_dir: "assets/css" }
+
+# Use jekyll-redirect-from to allow redirections
+plugins:
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+
+# --- Jekyll Locations ---
+layouts_dir: _jekyll/layouts
+includes_dir: _jekyll/includes
+
+# --- Collections ---
+collections:
+  Streams: { output: true }
+  CodingChallenges: { output: true }
+  Tutorials: { output: true }
+  GuestTutorials: { output: true }
+  Courses: { output: true }
+  Guides: { output: true }
+  TeachableMachine: { output: true }
+  beginners: { output: true }
+  challenges: { output: true }
+  learning: { output: true }
+  more: { output: true }
+  redirects: { output: true }
+
+# --- Defaults ---
+
+defaults:
+  # Streams
+  - scope: { path: "", type: "Streams" }
+    values:
+      layout: "video"
+      video_type: "Stream"
+      can_contribute: false
+
+  # Coding Challenges
+  - scope: { path: "", type: "CodingChallenges" }
+    values:
+      layout: "video"
+      video_type: "Coding Challenge"
+      video_type_short: "Challenge"
+      can_contribute: true
+
+  # Tutorials
+  - scope: { path: "", type: "Tutorials" }
+    values:
+      layout: "video"
+      video_type: "Tutorial"
+      can_contribute: false
+
+  # beginners
+  - scope: { path: "", type: "beginners" }
+    values:
+      layout: "video"
+      video_type: "Lesson"
+      can_contribute: false
+
+  # learning
+  - scope: { path: "", type: "learning" }
+    values:
+      layout: "video"
+      video_type: "Lesson"
+      can_contribute: false
+
+  # challenges
+  - scope: { path: "", type: "challenges" }
+    values:
+      layout: "video"
+      video_type: "Challenge"
+      can_contribute: true
+
+  # Guest Tutorials
+  - scope: { path: "", type: "GuestTutorials" }
+    values:
+      layout: "video"
+      video_type: "Guest Tutorial"
+      video_type_short: "Tutorial"
+      can_contribute: true
+
+  # Courses
+  - scope: { path: "", type: "Courses" }
+    values:
+      layout: "video"
+      video_type: "Session"
+      can_contribute: false
+
+  - scope: { path: "", type: "Guides" }
+    values:
+      layout: "guide"
+
+  - scope: { path: "", type: "more" }
+    values:
+      video_type: "Video"
+      layout: "video"
+
+  # Teachable Machine
+  - scope: { path: "", type: "TeachableMachine" }
+    values:
+      layout: "video"
+      video_type: "Teachable Machine"
+      video_type_short: "Tutorial"
+      can_contribute: true
+
+  # Redirects
+  - scope: { path: "", type: "redirect" }
+    values:
+      layout: "external-redirect"

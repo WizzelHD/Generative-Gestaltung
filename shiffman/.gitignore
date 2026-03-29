@@ -1,0 +1,12 @@
+.DS_Store
+*.pdf
+*.xml
+*.class
+.env
+node_modules
+build
+.env
+license.dat
+public/
+.cache/
+coverage/

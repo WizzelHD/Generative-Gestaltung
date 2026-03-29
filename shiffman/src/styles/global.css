@@ -1,0 +1,74 @@
+@import 'codesplit.css';
+@import 'callout.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.chapter-opening-quote blockquote {
+  @apply border-none text-center text-sm;
+}
+
+.chapter-opening-figure > figure {
+  @apply mb-0;
+}
+
+.chapter-opening-figure > span {
+  @apply text-sm font-semibold;
+}
+
+.chapter-opening-figure > p {
+  @apply mt-0 text-xs italic leading-5;
+}
+
+.chapter-opening-figure > hr {
+  @apply mx-auto border-noc-200 lg:max-w-[100px];
+}
+
+.half-width-right {
+  @apply md:float-right md:ml-5 md:mt-0 md:max-w-[50%];
+}
+
+.half-width-left {
+  @apply md:float-left md:mr-5 md:mt-0 md:max-w-[50%];
+}
+
+.math-display > .katex-display > .katex {
+  @apply clear-both overflow-x-auto overflow-y-hidden whitespace-normal text-left;
+}
+
+.col-list {
+  @apply md:flex md:gap-6;
+}
+
+.col-list > * {
+  @apply flex-1;
+}
+
+.heading-link {
+  @apply relative mr-6 font-inherit no-underline;
+}
+
+.heading-link::before {
+  @apply absolute left-[-1.9rem] inline-block h-[1.6rem] w-[2rem] px-[0.4rem] py-[0.1rem] opacity-0 content-icon-link;
+}
+
+.heading-link:hover::before {
+  @apply lg:opacity-100;
+}
+
+.shopify-buy__btn {
+  @apply absolute inset-0 flex items-center justify-center rounded-xl bg-noc-400 text-sm font-medium text-white;
+}
+
+@layer base {
+  html {
+    @apply overflow-y-scroll;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply clear-both scroll-mt-24;
+  }
+}

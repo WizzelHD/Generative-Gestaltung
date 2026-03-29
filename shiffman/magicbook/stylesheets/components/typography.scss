@@ -1,0 +1,199 @@
+:root {
+  font-size: 8pt;
+}
+
+body {
+  font-family: $font-sans;
+  margin: 0;
+}
+
+p {
+  line-height: 13.5pt;
+  margin-top: 10pt;
+  margin-bottom: 10pt;
+  font-weight: $font-book;
+  orphans: 2;
+  widows: 2;
+}
+
+h1 {
+  font-size: 18pt;
+  margin-top: 36pt;
+  margin-bottom: 18pt;
+}
+
+h2 {
+  font-size: 14pt;
+  margin-top: 28pt;
+  margin-bottom: 14pt;
+}
+
+h3 {
+  font-size: 12pt;
+  margin-top: 24pt;
+  margin-bottom: 12pt;
+}
+
+h4 {
+  font-size: 10pt;
+  margin-top: 20pt;
+  margin-bottom: 10pt;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: $font-bold;
+  clear: both;
+  page-break-after: avoid;
+
+  code {
+    font-size: inherit !important;
+    font-weight: 700;
+  }
+}
+
+strong {
+  font-weight: $font-bold;
+}
+
+.katex-display > .katex {
+  text-align: left;
+  margin: 0 5mm;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+code {
+  font-family: $font-mono;
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+code:not(pre code) {
+  font-size: 8.5pt;
+  line-height: 12pt;
+  display: inline-block;
+  background-color: $color-gray-100;
+  padding: 0 2pt;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  // Internal links
+  // for the ones include '#' but not at the end
+  &.page-reference:not([href^='http'])[href*='#']:not([href$='#'])::after {
+    content: ' on page '
+      prince-script(
+        format-number,
+        target-counter(attr(href), is-decimal),
+        target-counter(attr(href), page),
+        target-counter(attr(href), page, lower-roman)
+      );
+  }
+
+  span.url {
+    font-style: italic;
+  }
+}
+
+ol,
+ul {
+  margin: 10pt 10mm;
+  padding-left: 0;
+  list-style-position: outside;
+
+  li {
+    line-height: 13.5pt;
+    font-weight: $font-book;
+    margin: 4pt 0;
+  }
+}
+
+ol > li > ol {
+  list-style-type: lower-alpha;
+
+  > li > ol {
+    list-style-type: lower-roman;
+  }
+}
+
+ul > li > ul {
+  list-style-type: circle;
+
+  > li > ul {
+    list-style-type: square;
+  }
+}
+
+figure {
+  margin-top: 12pt;
+  margin-bottom: 12pt;
+  page-break-inside: avoid;
+
+  img {
+    display: block;
+    width: 100%;
+    margin: 0;
+    background-color: white;
+  }
+
+  figcaption:not(:empty) {
+    margin-top: 6pt;
+    color: $color-gray-500;
+    font-weight: $font-book;
+    font-size: 7pt;
+    line-height: 10pt;
+  }
+}
+
+// floting figures
+.half-width-right {
+  float: right;
+  margin-left: 5mm;
+  max-width: 50%;
+}
+
+.half-width-left {
+  float: left;
+  margin-right: 5mm;
+  max-width: 50%;
+}
+
+.half-width-right > figure,
+.half-width-left > figure {
+  margin-top: 0;
+}
+
+// column list
+.col-list {
+  display: flex;
+  align-items: center;
+
+  > * {
+    flex: 1;
+    margin-left: 5mm;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+span.combined {
+  break-inside: avoid;
+  white-space: nowrap;
+}
+
+span.katex {
+  break-inside: avoid;
+  white-space: nowrap;
+}

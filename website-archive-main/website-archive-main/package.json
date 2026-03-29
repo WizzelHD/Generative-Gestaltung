@@ -1,0 +1,49 @@
+{
+  "name": "coding-train-website",
+  "version": "0.0.1",
+  "description": "Coding Train Website",
+  "main": "none",
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "eslint": "^8.8.0",
+    "eslint-config-p5js": "^1.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "octocat": "^1.2.1",
+    "prettier": "^1.19.1",
+    "replace-in-file": "^6.3.2",
+    "yaml-front-matter": "^4.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-html": "bundle exec htmlproofer ./_site --assume-extension --check-html --disable-external --url-ignore '/#.*/'",
+    "lint": "npm run lint-cc && npm run lint-cabana && npm run lint-beginners && npm run lint-tutorials && npm run lint-courses",
+    "lint-cc": "./node_modules/.bin/eslint ./CodingChallenges/",
+    "lint-cabana": "./node_modules/.bin/eslint ./challenges/coding-in-the-cabana/",
+    "lint-beginners": "./node_modules/.bin/eslint ./beginners",
+    "lint-tutorials": "./node_modules/.bin/eslint ./Tutorials/",
+    "lint-courses": "./node_modules/.bin/eslint ./Courses/",
+    "lint-fix": "npm run lint-cc-fix && npm run lint-cabana-fix && npm run lint-tutorials-fix && npm run lint-courses-fix",
+    "lint-cc-fix": "./node_modules/.bin/eslint ./CodingChallenges/ --fix",
+    "lint-cabana-fix": "./node_modules/.bin/eslint ./CodingInTheCabana/ --fix",
+    "lint-tutorials-fix": "./node_modules/.bin/eslint ./Tutorials/ --fix",
+    "lint-courses-fix": "./node_modules/.bin/eslint ./Courses/ --fix",
+    "yt-descriptions": "node ./_scripts/generate-youtube-descriptions.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodingTrain/website.git"
+  },
+  "keywords": [
+    "coding",
+    "train",
+    "tutorials",
+    "beginner"
+  ],
+  "author": "The Coding Train Community",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodingTrain/website/issues"
+  },
+  "homepage": "https://github.com/CodingTrain/website#readme"
+}

@@ -1,0 +1,60 @@
+table {
+  margin-top: 10pt;
+  margin-bottom: 10pt;
+  width: 100%;
+  page-break-inside: avoid;
+  border-collapse: collapse;
+
+  thead > tr {
+    border-bottom: 1px solid $color-gray-200;
+
+    th {
+      text-align: left;
+      font-weight: $font-bold;
+      padding: 4pt;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  tbody > tr {
+    border-bottom: 1px solid $color-gray-100;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    td {
+      font-weight: $font-book;
+      vertical-align: top;
+      padding: 4pt;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  // block level code in table
+  pre {
+    background: $color-gray-100;
+    border-radius: $rounded-radius-sm;
+    padding: 4pt 8pt;
+  }
+
+  ol,
+  ul {
+    margin: 0;
+    margin-left: 14pt;
+  }
+}
